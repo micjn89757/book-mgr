@@ -1,0 +1,63 @@
+.container{
+  align-items: center;
+  justify-content: center;
+  padding-top: 100px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: url(../../assets/background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  .header{
+    width: 400px;
+    padding: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img{
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-right: 20px;
+
+    }
+    h1{
+      width: 60%;
+      text-align: left;
+      margin: 0;
+    }
+  }
+  .main{
+    width: 400px;
+    padding: 0;  
+    .form{
+      
+      .tabs{
+        margin: 0 auto !important;
+
+        .login, .register{
+          button{
+            width: 100%;
+            height: 40px;
+          }
+        }
+
+        .login{
+          a{
+            color:rgb(64, 158, 255);
+            margin: 10px 0;
+          }
+          button{
+            
+            margin-bottom: 0;
+            
+          }
+        }
+
+      }
+    }
+  }
+}
