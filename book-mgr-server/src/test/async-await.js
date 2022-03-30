@@ -42,23 +42,23 @@ const request = (arg, isReject) => {
 }
 
 //resolve触发then，reject触发catch
-// request(1).then((res1) => {
-//   return request(res1, true);
-// }).catch((res2) => {
-//   console.log(res2);
-// })
+request(1).then((res1) => {
+  return request(res1, true);
+}).catch((res2) => {
+  console.log(res2);
+})
 
-// request(1).then((res1) => {
-//   return request(res1);
-// }).then((res2) => {
-//   return request(res2);
-// }).then((res3) => {
-//   return request(res3);
-// }).then((res4) => {
-//   return request(res4);
-// }).then((res5) => {
-//   return request(res5);
-// })
+request(1).then((res1) => {
+  return request(res1);
+}).then((res2) => {
+  return request(res2);
+}).then((res3) => {
+  return request(res3);
+}).then((res4) => {
+  return request(res4);
+}).then((res5) => {
+  return request(res5);
+})
 
 
 // async 函数返回的就是一个promise
