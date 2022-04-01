@@ -15,11 +15,11 @@
       </el-row>
     </el-header>
 
-    <el-container class="content">
+    <el-container>
       <el-aside width="200px">
         <app-nav />
       </el-aside>
-      <el-main>
+      <el-main class="content">
         <router-view />
       </el-main>
     </el-container>

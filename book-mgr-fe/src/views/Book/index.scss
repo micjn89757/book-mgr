@@ -1,0 +1,46 @@
+.book-list {
+  position: relative;
+
+  .list-header{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .body {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    .search {
+      position: relative;
+      display: flex;
+      width: 20vw;
+  
+      .button {
+        position: absolute;
+        right: 0;
+        width: 50px;
+      }
+    }
+    
+    margin-bottom: 5vh;
+  }
+
+
+  .table {
+    
+  }
+
+  .pagination {
+    margin-top: 20px;
+    padding: 0;
+    justify-content: end;
+  }
+}
+
+
+
+.book-list::after {
+  content: '';
+  display: block;
+  clear: both;
+}
