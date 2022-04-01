@@ -1,0 +1,44 @@
+.basic-layout{
+  padding-top: 0;
+  .header{
+    height: 64px;
+    padding: 0 16px;
+    box-shadow: 0 2px 8px rgb(226, 219, 219);
+    
+    .row{
+      height: 100%;
+
+      .left{
+        display: flex;
+        align-items: center;
+
+        img{
+          width: 40px;
+          height: 40px;
+          border-radius: 30%;
+          margin-right: 10px;
+        }
+        h1{
+          margin: 0;
+          font-size: 16px;
+          color: #303133;
+        }
+      }
+
+      .right{
+        display: flex;
+        justify-content: space-between;
+        .user{
+          font-weight: bold;
+          color: #606266;
+          font-size: 16px;
+        }
+
+        .exit{
+          font-weight: bold;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
