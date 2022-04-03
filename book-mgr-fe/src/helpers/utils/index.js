@@ -1,5 +1,3 @@
-import { ElMessage } from "element-plus";
-
 export const result = (response) => {
   const { data } = response;
 

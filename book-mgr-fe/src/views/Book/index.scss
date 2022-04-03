@@ -10,24 +10,34 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
-    .search {
-      position: relative;
-      display: flex;
-      width: 20vw;
+    .search {  
+      width: 20vw; 
+
+      .el-input {
+        float: left;
+        width: 12vw;
+      }
   
       .button {
-        position: absolute;
+        float: left;
         right: 0;
-        width: 50px;
+        width: 4vw;
       }
     }
-    
-    margin-bottom: 5vh;
+
+    .search::after {
+      content: '';
+      display: block;
+      clear: both;
+    }    
+    margin-bottom: 3vh;
   }
 
 
   .table {
-    
+    .tag{
+      margin-right: 6px;
+    }       
   }
 
   .pagination {
@@ -35,6 +45,10 @@
     padding: 0;
     justify-content: end;
   }
+
+  
+
+  
 }
 
 
