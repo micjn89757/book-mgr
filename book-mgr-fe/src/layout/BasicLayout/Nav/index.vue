@@ -13,7 +13,7 @@
         <el-icon><icon-menu /></el-icon>
         <span>图书管理</span>
       </el-menu-item>
-      <el-menu-item index="3" disabled>
+      <el-menu-item index="/user">
         <el-icon><document /></el-icon>
         <span>角色管理</span>
       </el-menu-item>
