@@ -49,7 +49,10 @@
 
       <el-table-column prop="actions" label="Actions">
         <template v-slot="scope">
+          <el-link type="primary" @click="toDetail(list[scope.$index])" style="margin-right: 5px;">详情</el-link>
+
           <el-link type="primary" @click="update(list[scope.$index])" style="margin-right: 5px;">修改</el-link>
+
           <el-link @click="remove(list[scope.$index])" type="primary">删除</el-link>
         </template>
       </el-table-column>

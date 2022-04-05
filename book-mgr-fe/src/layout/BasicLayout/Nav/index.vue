@@ -1,6 +1,6 @@
 <template>
     <el-menu
-        default-active="book"
+        default-active="/book"
         router="true"
         class="nav-menu"
       >
@@ -9,7 +9,7 @@
         <span>概览</span>
       </el-menu-item>
         
-      <el-menu-item index="book">
+      <el-menu-item index="/book">
         <el-icon><icon-menu /></el-icon>
         <span>图书管理</span>
       </el-menu-item>

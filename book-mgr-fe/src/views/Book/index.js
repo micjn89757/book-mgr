@@ -1,4 +1,5 @@
 import { defineComponent, ref, onMounted, reactive } from "vue";
+import { useRouter } from 'vue-router'
 import AddOne from "./AddOne/index.vue";
 import { book } from "@/service";
 import { result } from "@/helpers/utils"
@@ -21,8 +22,10 @@ export default defineComponent({
       return index + 1
     }
 
+    const router = useRouter();
+
     // 添加书籍的对话框是否显示
-    const show = ref(false);
+    const show = ref(false);   
     // 修改书籍弹框显示
     const showUpdateModal = ref(false);
     const inCountShow = ref(false);
@@ -124,7 +127,7 @@ export default defineComponent({
 
     // 删除一本书籍
     const remove = async(record) => {
-      console.log(record);
+      // console.log(record);
 
       const { _id } = record;
 
@@ -136,17 +139,7 @@ export default defineComponent({
           type: 'success'
         });
 
-        // // 寻找要删除的内容在列表数组的位置
-        // // 这个方法会在遍历数组时都执行一个回调函数, 函数的参数是对于每一条的数据
-        // // 回调函数返回true，方法返回该索引
-        // const idx = list.value.findIndex((item) => {
-        //   return item._id === _id;
-        // });
-
-        // // 删除该条数据
-        // list.value.splice(idx, 1);
-
-        // 或者直接使用getList()刷新列表
+        // 直接使用getList()刷新列表
         getList(); // 这样在显示时会与后端数据同步
       })
     }
@@ -172,7 +165,7 @@ export default defineComponent({
       getList();
     })
 
-    // 更新操作，把要更新的书籍信息传给子组件
+    // 更新操作，显示更新弹框,把要更新的书籍信息传给子组件
     const update = (record) => {
       showUpdateModal.value = true;
       curEditBook.value = record;
@@ -181,6 +174,11 @@ export default defineComponent({
     // 给子组件提供修改父组件数据的方法
     const updateCurBook = (newData) => {
       Object.assign(curEditBook.value, newData);
+    }
+
+    // 进入书籍详情页
+    const toDetail = (record) => {
+      router.push(`/book/${record._id}`);
     }
 
     return {
@@ -207,7 +205,8 @@ export default defineComponent({
       showUpdateModal,
       update,
       curEditBook,
-      updateCurBook
+      updateCurBook,
+      toDetail
     }
   }
 });

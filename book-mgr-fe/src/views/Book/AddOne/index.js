@@ -4,12 +4,12 @@ import { result, clone } from '@/helpers/utils';
 import { ElMessage } from "element-plus";
 
 const defaultFormData = {
-      name: '',
-      price: 0,
-      author: '',
-      publishDate: '',
-      classify: '',
-      count: ''
+    name: '',
+    price: 0,
+    author: '',
+    publishDate: '',
+    classify: '',
+    count: ''
 }
 
 export default defineComponent({
@@ -47,7 +47,7 @@ export default defineComponent({
 
     // 提交表单数据并关闭对话框
     const submit = async (ruleForm) => {
-      console.log(addForm);
+      console.log(addForm.classify);
       if(!ruleForm) return;
       await ruleForm.validate(async(valid, fields) => {
         if(valid) {
@@ -58,7 +58,9 @@ export default defineComponent({
             ElMessage({
               type: 'success',
               message: msg
-            })
+            });
+
+            close();
           })
         }else {
           console.log('error', fields)
