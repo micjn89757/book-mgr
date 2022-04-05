@@ -34,3 +34,8 @@ export const result = (response) => {
     }
   }
 }
+
+
+export const clone = (obj) => {
+  return JSON.parse(JSON.stringify(obj));
+};
