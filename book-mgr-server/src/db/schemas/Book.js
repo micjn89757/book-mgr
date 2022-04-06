@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { getMate } = require('../helpers.js')
+const { getMeta, preSave } = require('../helpers.js')
 /**
  * 给哪个数据库的哪个集合
  * 添加什么格式的文档
@@ -19,9 +19,14 @@ const BookSchema = new mongoose.Schema({
   publishDate: String,
   // 分类标签
   classify: Array,
+  // 库存
+  count:Number,
   
-  meta: getMate()
+  meta: getMeta()
 });
+
+// mongoose每次在保存数据的时候先执行检查
+BookSchema.pre('save', preSave);
 
 //Modal 根据Schema生成的一套方法集合(模型)，这套方法用来操作集合和集合下的文档
 //默认会在数据库中生成users集合

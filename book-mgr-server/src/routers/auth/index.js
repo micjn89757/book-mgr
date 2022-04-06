@@ -2,6 +2,7 @@ const Router = require('@koa/router');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const { getBody } = require("../../helpers/utils");
+const config = require("../../project.config");
 
 
 const User = mongoose.model('User');
@@ -110,6 +111,7 @@ router.post('/login', async (ctx) => {
   // 用于token返回的参数
   const user = {
     account: one.account,
+    character: one.character,
     _id: one._id
   }
 
@@ -119,7 +121,7 @@ router.post('/login', async (ctx) => {
       msg: '登录成功',
       data: {
         user: user,
-        token: jwt.sign(user, 'book-mgr')
+        token: jwt.sign(user, config.JWT_SECRET)
       }
     }
     return;

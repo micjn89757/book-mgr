@@ -2,10 +2,12 @@ import { defineComponent, ref, reactive } from "vue";
 import { user } from "@/service";
 import { result, clone } from '@/helpers/utils';
 import { ElMessage } from "element-plus";
+import store from "@/store";
 
 const defaultFormData = {
     account: '',
-    password: ''
+    password: '',
+    character: ''
 }
 
 export default defineComponent({
@@ -13,8 +15,13 @@ export default defineComponent({
     show: Boolean,
   },
   setup(props, context) {
+    const { characterInfo } = store.state;
+
     // 对话框的数据
     const addForm = reactive(clone(defaultFormData));
+
+    // 默认选择成员角色
+    addForm.character = characterInfo[1]._id;
 
     // 提交时进行表单校验使用
     const ruleFormRef = ref('');
@@ -26,6 +33,9 @@ export default defineComponent({
       ],
       password: [
         {required:true, message:'请输入密码', trigger:'change'}
+      ],
+      character: [
+        {required:true, message:'请选择角色', trigger:'change'}
       ]
     })
 
@@ -63,7 +73,8 @@ export default defineComponent({
       props,
       close,
       rules,
-      ruleFormRef
+      ruleFormRef,
+      characterInfo
     }
   }
 });

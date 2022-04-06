@@ -107,7 +107,7 @@ export default defineComponent({
     // 当前页数
     const currentPage = ref(1);
 
-    // 请求书籍列表
+    // !请求书籍列表
     const getList = async() => {
        // 当组件被初始化/挂载时触发的事件, 进行请求数据
       const res = await book.list({

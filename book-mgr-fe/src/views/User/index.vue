@@ -18,18 +18,53 @@
       <add-one 
         v-model:show="showAddModal"
         @getList="getUser"/>
+
+      <!-- !编辑角色弹框 -->
+      <el-dialog
+        v-model="showEditCharacterModal"
+        title="修改角色"
+        width="30%"
+        :before-close="editClose">
+        <el-form :rules="rules" ref="ruleFormRef" :model="editCharForm">
+          <el-form-item label="角色" prop="character" label-width="25%">
+            <el-col :offset="0" :span="14">
+              <el-select v-model="editCharForm.character" class="m-2" placeholder="请选择角色">
+                <el-option
+                  v-for="item in characterInfo"
+                  :key="item._id"
+                  :label="item.title"
+                  :value="item._id"
+                />
+              </el-select>
+            </el-col>
+          </el-form-item>
+        </el-form>
+        
+        <template #footer>
+          <span class="dialog-footer">
+            <el-button @click="editClose">关闭</el-button>
+            <el-button type="primary" @click="editCharSubmit(ruleFormRef)">提交</el-button>
+          </span>
+        </template>
+      </el-dialog>
   
       <div class="body">
         <el-table :data="list" border style="width: 100%">
-          <el-table-column prop="account" label="Account"/>
-          <el-table-column prop="num" label="IsInvited"/>
-          <el-table-column prop="num" label="Access"/>
-          <el-table-column label="CreateDate">
+          <el-table-column prop="account" label="账户"/>
+          <el-table-column prop="num" label="是否有邀请码"/>
+          <el-table-column label="角色">
+            <template v-slot="scope">
+              <el-link type="primary" :icon="Edit" @click="onEdit(list[scope.$index])" style="margin-bottom: 2px;">
+              </el-link>
+              {{getCharacterInfoById(list[scope.$index].character).title}}
+            </template>
+          </el-table-column>
+          <el-table-column label="创建时间">
             <template v-slot="scope">
               {{moment(list[scope.$index].meta.createdAt).format('YYYY-MM-DD HH:mm:ss')}}
             </template>
           </el-table-column>
-          <el-table-column label="Actions">
+          <el-table-column label="操作">
             <template v-slot="scope">
               <el-link type="primary" @click="resetPassword(list[scope.$index])" style="margin-right: 5px;">重置密码</el-link>
               <el-link type="primary"  @click="remove(list[scope.$index])">删除</el-link>

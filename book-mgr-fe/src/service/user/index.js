@@ -1,26 +1,39 @@
-import axios from 'axios';
+import {
+  dele, post, get
+} from '@/helpers/request';
+import { getToken } from '@/helpers/token';
 
 export const list = (page = 1, size = 20, keyword = "") => {
-  return axios.get('http://localhost:3000/user/list', {
-    params: {
-      page,
-      size,
-      keyword
-    }
+  return get('/user/list', {
+    page,
+    size,
+    keyword
   })
 }
 
 export const add = (data) => {
-  return axios.post('http://localhost:3000/user/add', data)
+  return post('/user/add', data)
 }
 
 export const del = (id) => {
-  return axios.delete(`http://localhost:3000/user/${id}`,);
+  return dele(`/user/${id}`,);
 }
 
 export const resetPassword = (id) => {
-  return axios.post("http://localhost:3000/user/reset/password", {
+  return post("/user/reset/password", {
     id
   })
+}
+
+export const editCharacter = (character, userId) => {
+  return post("/user/update/character",{
+    character,
+    userId
+  })
+}
+
+// 获取用户信息并验证token
+export const info = () => {
+  return get("/user/info")
 }
 

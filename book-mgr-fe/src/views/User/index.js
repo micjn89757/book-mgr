@@ -1,12 +1,15 @@
-import { defineComponent, ref, onMounted } from 'vue';
+import { defineComponent, ref, onMounted, reactive } from 'vue';
 import { user } from '@/service';
 import { result } from '@/helpers/utils';
 import { ElMessage } from 'element-plus';
 import moment from 'moment';
 import AddOne from './AddOne/index.vue';
+import { getCharacterInfoById } from '../../helpers/character';
+import store from '@/store';
 
 import {
   Search,
+  Edit
 } from '@element-plus/icons-vue'
 
 export default defineComponent({
@@ -23,6 +26,23 @@ export default defineComponent({
 
     // 添加用户弹窗显示控制
     const showAddModal = ref(false);
+    const showEditCharacterModal = ref(false);
+
+    // 表单校验使用
+    const ruleFormRef = ref('');
+
+    // 编辑角色表单校验规则
+    const rules = reactive({
+      character:[
+        {required: true, message: '请输入角色', trigger: 'change'}
+      ],
+    })
+
+    // 编辑角色表单双向绑定
+    const editCharForm = reactive({
+      character: '',
+      current: {} // 当前编辑的是哪个用户
+    })
 
     // 搜索框关键字
     const keyword = ref("");
@@ -68,6 +88,40 @@ export default defineComponent({
 
       isSearch.value = true
     }
+  
+    // 关闭编辑弹窗
+    const editClose = () => {
+      showEditCharacterModal.value = false
+    }
+
+    // 拿到当前编辑的是哪一条用户数据
+    const onEdit = (record) => {
+      showEditCharacterModal.value = true;
+      editCharForm.current = record;
+      editCharForm.character = record.character;
+    }
+
+    // 修改角色
+    const editCharSubmit = async(ruleForm) => {
+      if(!ruleForm) return;
+      await ruleForm.validate(async(valid, fields) => {
+        if(valid) {
+          const res = await user.editCharacter(editCharForm.character, editCharForm.current._id);    
+          result(res).success(({msg}) => {
+            ElMessage({
+              type: 'success',
+              message: msg
+            });
+            editClose();
+
+            getUser();
+          })
+        }else {
+          console.log('error', fields)
+        }
+      })
+    }
+
 
     // 重置密码
     const resetPassword = async({_id}) => {
@@ -110,7 +164,17 @@ export default defineComponent({
       keyword,
       onSearch,
       back,
-      isSearch
+      isSearch,
+      getCharacterInfoById,
+      Edit,
+      showEditCharacterModal,
+      editClose,
+      rules,
+      ruleFormRef,
+      editCharForm,
+      editCharSubmit,
+      onEdit,
+      characterInfo: store.state.characterInfo 
     }
   }
 })

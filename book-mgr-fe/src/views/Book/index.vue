@@ -12,7 +12,7 @@
         <el-button class="button" @click="onSearch"  
         :icon="Search" type="primary"/>
       </div>   
-      <el-button class="add-button" :icon="Plus" type="primary" @click="show = true" plain>添加书籍</el-button>
+      <el-button class="add-button" :icon="Plus" type="primary" v-only-admin  @click="show = true" plain>添加书籍</el-button>
     </div>
     <!-- 添加书籍弹框组件 -->
     <add-one v-model:show="show" />
@@ -51,9 +51,9 @@
         <template v-slot="scope">
           <el-link type="primary" @click="toDetail(list[scope.$index])" style="margin-right: 5px;">详情</el-link>
 
-          <el-link type="primary" @click="update(list[scope.$index])" style="margin-right: 5px;">修改</el-link>
+          <el-link type="primary" @click="update(list[scope.$index])" v-only-admin style="margin-right: 5px;">修改</el-link>
 
-          <el-link @click="remove(list[scope.$index])" type="primary">删除</el-link>
+          <el-link @click="remove(list[scope.$index])" type="primary" v-only-admin >删除</el-link>
         </template>
       </el-table-column>
     </el-table>

@@ -1,31 +1,33 @@
-import axios from 'axios';
+import {
+  dele, post, get
+} from '@/helpers/request';
 
-export const add = (form) => {
+export const add = (data) => {
   //返回的是一个promise
-  return axios.post('http://localhost:3000/book/add', form)
+  return post('/book/add', data)
 }
 
 export const list = (data) => {
-  return axios.get('http://localhost:3000/book/list', {
-    params: data
+  return get('/book/list', {
+    data,
   })
 }
 
 export const del = (id) => {
-  return axios.delete(`http://localhost:3000/book/${id}`,);
+  return dele(`/book/${id}`);
 }
 
 // 库存
 export const updateCount = (data = {}) => {
-  return axios.post(`http://localhost:3000/book/update/count`, data);
+  return post(`/book/update/count`, data);
 }
 
 // 修改书籍
 export const update = (data = {}) => {
-  return axios.post('http://localhost:3000/book/update', data);
+  return post('/book/update', data);
 }
 
 // 获取一本书的详细信息
 export const detail = (id) => {
-  return axios.get(`http://localhost:3000/book/detail/${id}`);
+  return get(`/book/detail/${id}`);
 }

@@ -6,8 +6,8 @@
         <div class="detail-header">
           <h2>书籍名字</h2>
           <div class="button">
-            <el-button type="primary" @click="showUpdateModal = true" plain>编辑</el-button>
-            <el-button type="danger" @click="remove" plain>删除</el-button>
+            <el-button type="primary" @click="showUpdateModal = true" v-only-admin  plain>编辑</el-button>
+            <el-button type="danger" @click="remove" v-only-admin  plain>删除</el-button>
           </div>
         </div>
         <update v-model:show="showUpdateModal" :book="detailInfo" @update="updateCurBook" />

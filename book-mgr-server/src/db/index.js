@@ -1,6 +1,8 @@
 require('./schemas/User');
 require('./schemas/InviteCode');
-require('./schemas/Book')
+require('./schemas/Book');
+require('./schemas/InventoryLog');
+require('./schemas/Character');
 
 const mongoose = require('mongoose');
 

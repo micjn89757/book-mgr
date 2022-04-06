@@ -4,6 +4,11 @@ import router from './router';
 import store from './store';
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import { regDirectives } from '@/helpers/directive'
 
 
-createApp(App).use(store).use(router).use(ElementPlus).mount('#app');
+const app = createApp(App);
+
+regDirectives(app);
+
+app.use(store).use(router).use(ElementPlus).mount('#app');
