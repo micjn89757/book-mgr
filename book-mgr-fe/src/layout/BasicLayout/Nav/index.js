@@ -1,24 +1,41 @@
 import { defineComponent } from "vue";
-import menu from '@/config/menu';
+import { useRoute } from "vue-router";
+import {items, subitems} from '@/config/menu';
 
 import {
-  Document,
+  Collection,
   Menu as IconMenu,
   User,
-  Message
+  Message,
+  Menu,
+  Position,
+  Box,
+  Lollipop,
+  Pointer,
+  List
 } from '@element-plus/icons-vue'
 
 export default defineComponent({
   components: {
-    Document,
+    Collection,
     IconMenu,
     User,
-    Message
-    
+    Message,
+    Menu,
+    Position,
+    Box,
+    Lollipop,
+    Pointer,
+    List
   },
   setup() {
+    const router = useRoute()
+    // console.log(router.path);
+
     return {     
-      menu      
+      items,
+      subitems,
+      router      
     }
   }
 });

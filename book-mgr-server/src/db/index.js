@@ -3,6 +3,9 @@ require('./schemas/InviteCode');
 require('./schemas/Book');
 require('./schemas/InventoryLog');
 require('./schemas/Character');
+require('./schemas/Log');
+require('./schemas/LogResponse')
+require('./schemas/ForgetPassword')
 
 const mongoose = require('mongoose');
 
@@ -15,8 +18,8 @@ const connect = () => {
     //当数据库被打开的时候 do sth
     mongoose.connection.on('open', () => {
       console.log("连接数据库成功");
-      resolve();
-    });
+      resolve('s');
+    }); 
   });  
 };
 

@@ -14,6 +14,8 @@ const UserSchema = new mongoose.Schema({
 
   character: String, // 用户角色包括，文案类型，权限, 这里存放的是对应角色的ID
 
+  hasCode: Boolean, // 是否有邀请码
+
   meta: getMeta()
 });
 

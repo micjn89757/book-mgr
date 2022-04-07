@@ -6,6 +6,7 @@ import moment from 'moment';
 import AddOne from './AddOne/index.vue';
 import { getCharacterInfoById } from '../../helpers/character';
 import store from '@/store';
+import { getHeaders } from "@/helpers/request"
 
 import {
   Search,
@@ -55,6 +56,7 @@ export default defineComponent({
       const res = await user.list(curPage.value, 10, keyword.value);
 
       result(res).success(({data:{list: resList, total: resTotal}}) => {
+        console.log(resList);
         list.value = resList;
         total.value = resTotal;
       })
@@ -150,6 +152,26 @@ export default defineComponent({
       getUser();
     })
 
+    // 上传excel
+    const onUploadChange = (file, fileList) => {
+      if (file.response) {
+        result(file.response)
+          .success(async (key) => {
+            const res = await user.addMany(key);
+
+            result(res)
+              .success(({ data: { addCount } }) => {
+                ElMessage({
+                  type:'success',
+                  message: `成功添加${addCount}位用户`
+                });
+
+                getUser();
+              });
+          });
+      }
+    };
+
     return {
       list,
       total,
@@ -174,7 +196,9 @@ export default defineComponent({
       editCharForm,
       editCharSubmit,
       onEdit,
-      characterInfo: store.state.characterInfo 
+      characterInfo: store.state.characterInfo,
+      onUploadChange,
+      headers:getHeaders()
     }
   }
 })

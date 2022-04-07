@@ -1,6 +1,8 @@
 const Router = require('@koa/router');
 const mongoose = require('mongoose');
 const { getBody } = require('../../helpers/utils')
+const config = require('../../project.config.js')
+const { loadExcel, getFirstSheet } = require('../../helpers/excel');
 
 const BOOK_COUNT = {
   IN: 1, //  代表入库
@@ -67,6 +69,8 @@ router.get('/list', async (ctx) => {
     size = 3,
     keyword = ''
   } = ctx.query; // 获取参数
+
+  // console.log(page);
   
   // Book这个集合下有多少文档
   let total = await Book.countDocuments();
@@ -241,5 +245,51 @@ router.get('/detail/:id', async(ctx) => {
     code: 1
   }
 })
+
+router.post('/addMany', async (ctx) => {
+  const {
+    key = '',
+  } = ctx.request.body;
+
+  const path = `${config.UPLOAD_DIR}/${key}`;
+
+  const excel = loadExcel(path);
+
+  const sheet = getFirstSheet(excel);
+
+  const arr = [];
+  for (let i = 0; i < sheet.length; i++) {
+    let record = sheet[i];
+
+    const [
+      name,
+      price,
+      author,
+      publishDate,
+      classify,
+      count,
+    ] = record;
+    
+
+    arr.push({
+      name,
+      price,
+      author,
+      publishDate,
+      classify: classify.split(','),
+      count,
+    });
+  }
+
+  await Book.insertMany(arr);
+
+  ctx.body = {
+    code: 1,
+    msg: '添加成功',
+    data: {
+      addCount: arr.length,
+    },
+  };
+});
 
 module.exports = router;

@@ -63,6 +63,8 @@ router.post('/register',async (ctx) => {
   const user = new User({
     account: account,
     password: password,
+    character: "624cda68682c80ec5a5f483a",
+    hasCode: true,
   }); 
 
   // 同步到MongoDB并返回数据

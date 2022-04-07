@@ -37,3 +37,9 @@ export const info = () => {
   return get("/user/info")
 }
 
+
+export const addMany = (key) => {
+  return post('/user/addMany', {
+    key,
+  });
+};

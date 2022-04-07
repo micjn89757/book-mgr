@@ -9,8 +9,8 @@
           <h1>图书管理系统后台</h1>
         </el-col>
         <el-col :span="2" class="right">
-          <el-link :icon="User" disabled class="user">用户</el-link>
-          <el-link :underline="false" type="danger" class="exit">退出</el-link>
+          <el-link :icon="User" disabled class="user">{{Store.state.userCharacter.title}}</el-link>
+          <el-link @click="exit" :underline="false" type="danger" class="exit">退出</el-link>
         </el-col>
       </el-row>
     </el-header>

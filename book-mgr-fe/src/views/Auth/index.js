@@ -1,7 +1,7 @@
 import { defineComponent, ref, reactive } from "vue";
 import { useRouter } from "vue-router"
 import { Avatar, Lock, Message } from "@element-plus/icons-vue";
-import { auth } from '@/service';
+import { auth, resetPassword } from '@/service';
 import { ElMessage } from 'element-plus';
 import { result } from '@/helpers/utils';
 import { setToken } from '@/helpers/token';
@@ -10,10 +10,10 @@ import store from '@/store';
 
 
 
+
 export default defineComponent({
   // 组件初始化的时候会执行一次
   setup() {
-
     const router = useRouter();
 
     // 注册用的表单数据
@@ -23,11 +23,44 @@ export default defineComponent({
       inviteCode: ''
     });
 
+
     // 登录用的表单数据
     const loginForm = reactive({
       account: '',
       password: ''
     });
+
+    // 忘记密码
+    const forgetPassword = async() => {
+      if(!loginForm.account) {
+        ElMessage({
+          type: 'warning',
+          message: '申请忘记密码账号不能为空'
+        })
+        return;
+      }
+
+      const res = await resetPassword.add(loginForm.account);
+
+      result(res).success(({msg}) => {
+        ElMessage({
+          type: 'success',
+          message: msg
+        })
+      }).fail(({msg}) => {
+        ElMessage({
+          type: 'error',
+          message: msg
+        })
+      })
+    }
+
+     // 登录表单校验规则
+    const lrules = reactive({
+      account:[
+        {required: true, message: '申请时账户不能为空', trigger: 'change'}
+      ],
+    })
 
     // ajax请求， 注册逻辑
     const register = async () => {
@@ -127,7 +160,8 @@ export default defineComponent({
       loginForm,
       activeName: ref('first'),
       register,
-      login
+      login,
+      forgetPassword,
     }
   }
 })

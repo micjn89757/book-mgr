@@ -27,13 +27,14 @@
               <el-input 
                 v-model="loginForm.password" 
                 placeholder="密码" 
+                type="password"
                 :prefix-icon="Lock">
               </el-input>             
             </el-form-item>
 
             <el-form-item>
               <el-button type="primary" @click="login">登录</el-button>
-              <a href="">忘记密码</a>
+              <el-link type="primary" @click="forgetPassword">忘记密码</el-link>
             </el-form-item>           
           </el-tab-pane>
 
@@ -48,6 +49,7 @@
 
             <el-form-item class="password">
               <el-input 
+              type="password"
               v-model="regForm.password" 
               placeholder="密码" 
               :prefix-icon="Lock"></el-input>

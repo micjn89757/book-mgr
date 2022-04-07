@@ -42,6 +42,7 @@ const middleware = (app) => {
     path: [
       /^\/auth\/login/,  // 登录接口不需要校验
       /^\/auth\/register/,  // 注册接口不需要校验
+      /^\/forget-password\/add/ // 忘记密码不需要校验
     ]
   }))
 }

@@ -5,7 +5,19 @@
       <template #header>
         <div class="header">
           <h2>用户管理</h2>
-          <el-button type="primary" @click="showAddModal = true" plain>添加用户</el-button>
+          <div style="display: flex;">
+            <el-button type="primary" @click="showAddModal = true" style="margin-right: 5px;" plain>添加用户</el-button>
+            <el-upload
+              action="http://localhost:3000/upload/file/"
+              :headers="headers"
+              :on-change="onUploadChange"
+              :file-list="fileList"
+            >
+              <el-button type="primary" @click="upload" plain>上传Excel添加</el-button>
+              <template #tip>               
+              </template>
+            </el-upload>
+          </div>
         </div>
       </template>
 
@@ -51,7 +63,11 @@
       <div class="body">
         <el-table :data="list" border style="width: 100%">
           <el-table-column prop="account" label="账户"/>
-          <el-table-column prop="num" label="是否有邀请码"/>
+          <el-table-column label="是否有邀请码">
+            <template v-slot="scope">
+              {{list[scope.$index].hasCode ? "有" : "无"}}
+            </template>
+          </el-table-column>
           <el-table-column label="角色">
             <template v-slot="scope">
               <el-link type="primary" :icon="Edit" @click="onEdit(list[scope.$index])" style="margin-bottom: 2px;">

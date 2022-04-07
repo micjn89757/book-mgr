@@ -1,0 +1,17 @@
+.profile {
+  .profile-card {
+    .body.el-row {
+      flex-direction: column;
+      align-items: center;
+
+      .el-col {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        .el-input {
+          width: 70%;
+        }
+      }
+    }
+  }
+}

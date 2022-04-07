@@ -4,6 +4,7 @@ import AddOne from "./AddOne/index.vue";
 import { book } from "@/service";
 import { result } from "@/helpers/utils"
 import { ElMessage } from 'element-plus'
+import { getHeaders } from "@/helpers/request"
 import Update from './Update/index.vue';
 
 
@@ -17,7 +18,23 @@ export default defineComponent({
     AddOne,
     Update
   },
-  setup() {
+  props: {
+    simple: Boolean
+  },
+  setup(props) {
+    // 加载显示
+    const loading = ref(true)
+    const svg = `
+        <path class="path" d="
+          M 30 15
+          L 28 17
+          M 25.61 25.61
+          A 15 15, 0, 0, 1, 15 30
+          A 15 15, 0, 1, 1, 27.99 7.5
+          L 15 15
+        " style="stroke-width: 4px; fill: rgba(0, 0, 0, 0)"/>
+      `
+
     const indexMethod = (index) => {
       return index + 1
     }
@@ -112,7 +129,7 @@ export default defineComponent({
        // 当组件被初始化/挂载时触发的事件, 进行请求数据
       const res = await book.list({
         page: currentPage.value, // 当前页码
-        size: 10, // 每页显示的数量
+        size: 8, // 每页显示的数量
         keyword: keyword.value // 关键词
       });
 
@@ -163,6 +180,9 @@ export default defineComponent({
     // 组件初始化时请求数据
     onMounted(async () => {
       getList();
+      if(list) {
+        loading.value = false
+      }
     })
 
     // 更新操作，显示更新弹框,把要更新的书籍信息传给子组件
@@ -180,6 +200,26 @@ export default defineComponent({
     const toDetail = (record) => {
       router.push(`/book/${record._id}`);
     }
+
+     // 上传excel
+    const onUploadChange = (file, fileList) => {
+      if (file.response) {
+        result(file.response)
+          .success(async (key) => {
+            const res = await book.addMany(key);
+
+            result(res)
+              .success(({ data: { addCount } }) => {
+                ElMessage({
+                  type:'success',
+                  message: `成功添加${addCount}本书籍`
+                });
+
+                getList();
+              });
+          });
+      }
+    };
 
     return {
       Search,
@@ -206,7 +246,12 @@ export default defineComponent({
       update,
       curEditBook,
       updateCurBook,
-      toDetail
+      toDetail,
+      loading,
+      svg,
+      simple: props.simple,
+      onUploadChange,
+      headers: getHeaders()
     }
   }
 });

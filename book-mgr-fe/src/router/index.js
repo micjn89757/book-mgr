@@ -31,6 +31,31 @@ const routes = [
         name: 'User',
         component: () => import(/* webpackChunkName: "User"*/"../views/User/index.vue"),
       },
+      {
+        path: 'log',
+        name: 'Log',
+        component: () => import(/* webpackChunkName: "Log"*/"../views/Log/index.vue"),
+      },
+      { 
+        path: 'reset/password',
+        name: 'ResetPassword',
+        component: () => import(/* webpackChunkName: "ResetPassword"*/"../views/ResetPassword/index.vue"),
+      },
+      {
+        path: 'inviteCode',
+        name: 'InviteCode',
+        component: () => import(/* webpackChunkName: "InviteCode"*/"../views/InviteCode/index.vue"),
+      },
+      {
+        path: 'profile',
+        name: 'Profile',
+        component: () => import(/* webpackChunkName: "Profile"*/"../views/Profile/index.vue"),
+      },
+      {
+        path: 'dashboard',
+        name: 'Dashboard',
+        component: () => import(/* webpackChunkName: "Dashboard"*/"../views/DashBoard/index.vue"),
+      },
     ]
   },
 ];

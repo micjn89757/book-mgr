@@ -1,0 +1,26 @@
+.inviteCode {
+  .inviteCode-card {
+    .header {
+      display: flex;
+      justify-content: center;
+    }
+
+    .body {      
+      .search {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: 10px;
+      }
+
+
+      .el-pagination {
+        padding: 0;
+        margin-top: 10px;
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+
+    
+  }
+}

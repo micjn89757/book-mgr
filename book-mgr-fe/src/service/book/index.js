@@ -8,9 +8,7 @@ export const add = (data) => {
 }
 
 export const list = (data) => {
-  return get('/book/list', {
-    data,
-  })
+  return get('/book/list', data)
 }
 
 export const del = (id) => {
@@ -31,3 +29,10 @@ export const update = (data = {}) => {
 export const detail = (id) => {
   return get(`/book/detail/${id}`);
 }
+
+export const addMany = (key) => {
+  return post('/book/addMany', {
+    key,
+  });
+};
+

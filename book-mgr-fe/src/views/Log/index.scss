@@ -1,0 +1,16 @@
+.log {
+  .log-card {
+    .header {
+      display: flex;
+    }
+
+    .body {
+      .el-pagination {
+        padding: 0;
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 9px;
+      }
+    }
+  }
+}
