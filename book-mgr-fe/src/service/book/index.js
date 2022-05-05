@@ -2,15 +2,18 @@ import {
   dele, post, get
 } from '@/helpers/request';
 
+// 添加数据
 export const add = (data) => {
   //返回的是一个promise
   return post('/book/add', data)
 }
 
+// 列表
 export const list = (data) => {
   return get('/book/list', data)
 }
 
+// 删除数据
 export const del = (id) => {
   return dele(`/book/${id}`);
 }
@@ -30,6 +33,7 @@ export const detail = (id) => {
   return get(`/book/detail/${id}`);
 }
 
+// 批量添加
 export const addMany = (key) => {
   return post('/book/addMany', {
     key,

@@ -56,7 +56,10 @@
             </el-form-item>
 
             <el-form-item class="password">
-              <el-input v-model="regForm.inviteCode" placeholder="邀请码" :prefix-icon="Message"></el-input>
+              <el-input 
+              v-model="regForm.inviteCode" 
+              placeholder="邀请码" 
+              :prefix-icon="Message"></el-input>
             </el-form-item>
             
             <el-form-item>

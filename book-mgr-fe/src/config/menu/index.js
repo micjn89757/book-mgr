@@ -48,7 +48,7 @@ export const subitems= [
         title: '邀请码',
         index: '/inviteCode',
         icon: 'lollipop',
-        onlyAdmin: true
+        onlyAdmin: false
       },
     ]
   }

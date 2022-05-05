@@ -15,7 +15,7 @@
           <el-icon><component :is="item.icon" /></el-icon>
           <span>{{item.title}}</span>
         </template>
-        <el-menu-item :index="i.index" v-for="i in item.children">
+        <el-menu-item v-only-admin="i.onlyAdmin" :index="i.index" v-for="i in item.children">
           <el-icon><component :is="i.icon" /></el-icon>
           <span>{{i.title}}</span>
         </el-menu-item>

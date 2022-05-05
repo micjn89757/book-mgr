@@ -17,10 +17,10 @@
             <el-table-column prop="account" label="账户"/>
             <el-table-column label="操作">
               <template v-slot="scope">
-                <el-button v-only-admin type="danger" @click="onReset(list[scope.$index], 2)" style="margin-right: 8px;" plain>
+                <el-button type="danger" @click="onReset(list[scope.$index], 2)" style="margin-right: 8px;" plain>
                   重置密码
                 </el-button>
-                <el-button v-only-admin type="primary" @click="onReset(list[scope.$index], 3)" plain>
+                <el-button type="primary" @click="onReset(list[scope.$index], 3)" plain>
                   忽略
                 </el-button>
               </template>
