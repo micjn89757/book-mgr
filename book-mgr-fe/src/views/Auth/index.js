@@ -55,12 +55,12 @@ export default defineComponent({
       })
     }
 
-     // 登录表单校验规则
-    const lrules = reactive({
-      account:[
-        {required: true, message: '申请时账户不能为空', trigger: 'change'}
-      ],
-    })
+    //  // 登录表单校验规则
+    // const lrules = reactive({
+    //   account:[
+    //     {required: true, message: '申请时账户不能为空', trigger: 'change'}
+    //   ],
+    // })
 
     // ajax请求， 注册逻辑
     const register = async () => {
