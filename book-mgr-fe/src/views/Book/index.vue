@@ -19,7 +19,7 @@
           :headers="headers"
           :on-change="onUploadChange"
           :file-list="fileList">
-          <el-button type="primary" @click="upload" plain>上传Excel添加</el-button>
+          <el-button type="primary" @click="upload" plain>批量上传</el-button>
           <template #tip>               
           </template>
         </el-upload>

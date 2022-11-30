@@ -77,6 +77,19 @@ router.post('/add', async(ctx) => {
     character
   } = getBody(ctx);
 
+  const usr = await User.findOne({
+    account
+  })
+
+  if(usr) {
+    ctx.body = {
+      code: 0,
+      msg: '出错啦'
+    }
+
+    return;
+  }
+
   const char = await Character.findOne({
     _id:character
   })
